@@ -4,6 +4,7 @@ import ThemeContext from "./ThemeContext";
 import Navbar from "./Navbar";
 import Details from "./Details";
 import SearchParams from "./SearchParams";
+import { render } from "react-dom";
 
 const App = () => {
   const themeHook = useState("darkblue");
@@ -23,4 +24,4 @@ const App = () => {
   );
 };
 
-export default App;
+render(<App />, document.getElementById("root"));

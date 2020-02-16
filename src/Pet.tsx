@@ -1,8 +1,19 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "@reach/router";
+import { Photo } from "@frontendmasters/pet";
 
-const Pet = ({ name, animal, breed, media, location, id }) => {
+interface IProps {
+  name: string;
+  animal: string;
+  breed: string;
+  media: Photo[];
+  location: string;
+  id: number;
+}
+
+const Pet: FunctionComponent<IProps> = props => {
+  const { name, animal, breed, media, location, id } = props;
   let hero = "https://placecorgi.com/300/300";
   if (media.length) {
     hero = media[0].small;
@@ -24,7 +35,7 @@ Pet.propTypes = {
   name: PropTypes.string.isRequired,
   animal: PropTypes.string.isRequired,
   breed: PropTypes.string.isRequired,
-  media: PropTypes.string.isRequired,
+  media: PropTypes.array.isRequired,
   location: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired
 };
