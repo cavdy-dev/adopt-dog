@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { render } from "react-dom";
 import { Router } from "@reach/router";
-import SearchParams from "./SearchParams";
-import Details from "./Details";
 import ThemeContext from "./ThemeContext";
 import Navbar from "./Navbar";
+
+const Details = lazy(() => import("./Details"));
+const SearchParams = lazy(() => import("./SearchParams"));
 
 const App = () => {
   const themeHook = useState("darkblue");
@@ -14,10 +15,12 @@ const App = () => {
       <ThemeContext.Provider value={themeHook}>
         <div>
           <Navbar />
-          <Router>
-            <SearchParams path="/" />
-            <Details path="/details/:id" />
-          </Router>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Router>
+              <SearchParams path="/" />
+              <Details path="/details/:id" />
+            </Router>
+          </Suspense>
         </div>
       </ThemeContext.Provider>
     </React.StrictMode>
